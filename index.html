@@ -16,7 +16,9 @@ html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--
 .seg button:hover{color:var(--ac)}
 .seg button+button{border-left:1px solid var(--bd)}
 .seg button.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;box-shadow:0 0 12px var(--glow)}
-.main .seg button{padding:9px 16px;font-size:15px}
+.main .seg button{padding:9px 18px;font-size:15.5px}
+#navsub{padding:6px 8px}#navsub .seg button{padding:7px 13px;font-size:14px}
+@media(max-width:700px){#navsub .seg{flex-wrap:wrap;justify-content:center;border-radius:14px}#navsub .seg button{padding:7px 10px;font-size:13.5px}}
 @media(max-width:700px){.main .seg{flex-wrap:wrap;justify-content:center;border-radius:14px}.main .seg button{padding:8px 10px;font-size:13.5px}}
 [hidden]{display:none!important}
 #anim{display:inline-flex;gap:10px;align-items:center}
@@ -41,9 +43,31 @@ canvas#cv:active{cursor:grabbing}
 .ab{max-width:720px;margin:0 auto;font-size:16px;line-height:1.6;background:var(--pn2);border:1px solid var(--bd);border-radius:14px;padding:clamp(16px,3vw,30px);box-shadow:0 0 28px -10px var(--glow)}
 .ab h1{font-size:clamp(22px,3.4vw,30px);line-height:1.2;font-weight:500;margin:6px 0 10px;text-wrap:balance}
 .ab h2{font-size:18px;font-weight:500;margin:22px 0 4px;color:var(--ac)}
-.ab p{margin:0 0 10px}.kick,.who{color:var(--mut);font-size:14px}
+.ab p{margin:0 0 10px}
+.gos{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.kick,.who{color:var(--mut);font-size:14px}
 #cred{color:var(--mut)}#cred a{color:var(--ac)}
 #cap{position:absolute;left:12px;right:64px;bottom:12px;padding:9px 12px;border-radius:10px;background:var(--pn2);border:1px solid var(--bd);font-size:14px;line-height:1.4;max-width:720px;box-shadow:0 0 16px -8px var(--glow)}
+#apps{flex:1;min-height:0;overflow:auto;padding:clamp(18px,4vw,40px) 16px}
+.prop{color:var(--mut);font-size:14px}
+table.apl{width:100%;border-collapse:collapse;margin:4px 0 6px;font-size:14.5px}
+table.apl th{text-align:left;font-weight:500;color:var(--mut);font-size:12.5px;border-bottom:1px solid var(--bd);padding:6px 4px}
+table.apl th:last-child,table.apl td:last-child{text-align:right;width:1%;white-space:nowrap}
+table.apl td{border-bottom:1px solid var(--bd);padding:9px 4px;vertical-align:top;line-height:1.4}
+.an{display:block;color:var(--fg);font-weight:500}.ad{display:block;color:var(--mut);font-size:13.5px;margin-top:2px}
+.st{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;border:1px solid currentColor}
+.st.com{color:#2b8a3e;background:rgba(47,158,68,.10)}.st.pro{color:#1c64d6;background:rgba(28,100,214,.10)}
+.st.dev{color:#b35c00;background:rgba(240,140,0,.12)}.st.pes{color:#6b3fd1;background:rgba(112,72,232,.10)}
+:root[data-theme=dark] .st.com{color:#69db7c}:root[data-theme=dark] .st.pro{color:#74b0ff}:root[data-theme=dark] .st.dev{color:#ffc04d}:root[data-theme=dark] .st.pes{color:#b197fc}
+.leg{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;color:var(--mut);font-size:13px}
+#refs{flex:1;min-height:0;overflow:auto;padding:clamp(18px,4vw,40px) 16px}
+#banp{flex:1;min-height:0;position:relative}
+#banv{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:10px}
+#banv img{display:block;width:100%;height:auto;margin:0 auto;border-radius:6px;box-shadow:0 0 22px -6px var(--glow);background:#fff;user-select:none;-webkit-user-select:none}
+#bzm{position:absolute;right:16px;top:16px;display:flex;flex-direction:column;gap:6px}
+#bzm button{width:40px;height:40px;border-radius:10px;border:1px solid var(--bd);background:var(--pn2);color:var(--fg);font-size:18px;cursor:pointer;box-shadow:0 0 10px -4px var(--glow)}
+ol.rl,ul.rl{padding-left:24px;font-size:14.5px;line-height:1.5}ol.rl li,ul.rl li{margin:0 0 9px}
+.rl a{color:var(--ac);word-break:break-all}
+a.pl.lk{display:inline-block;text-decoration:none;text-align:center}
 #ctt{position:fixed;right:12px;z-index:5;display:flex;flex-direction:column;align-items:flex-end;bottom:80px}
 #cttc{width:min(270px,calc(100vw - 24px));background:var(--pn2);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;box-shadow:0 0 24px -6px var(--glow);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:13.5px;line-height:1.45}
 .ct1{margin:0 0 6px}#ctm{color:var(--ac);word-break:break-all;font-size:13.5px}
@@ -52,8 +76,10 @@ canvas#cv:active{cursor:grabbing}
 </style></head><body>
 <canvas id="bgc" aria-hidden="true"></canvas>
 <div id="app">
- <div class="bar main"><div class="seg" id="mode">
-  <button data-v="sob" class="on">Sobre</button><button data-v="pri">Pristine</button><button data-v="hib">Híbridos</button><button data-v="bun">Bundles</button><button data-v="fol">Folha → nanotubo</button><button data-v="rep">Replicação</button></div></div>
+ <div class="bar main" id="secbar" hidden><div class="seg" id="sec">
+  <button data-v="sob" class="on">Sobre</button><button data-v="nano">Nanotubos</button><button data-v="apr">Material do evento</button></div></div>
+ <div class="bar" id="navsub" hidden><div class="seg" id="mode">
+  <button data-v="fol" data-s="nano">Folha</button><button data-v="pri" data-s="nano">Pristine</button><button data-v="hib" data-s="nano">Híbridos</button><button data-v="bun" data-s="nano">Bundles</button><button data-v="rep" data-s="nano">Replicação</button><button data-v="ban" data-s="apr">Banner</button><button data-v="ref" data-s="apr">Referências</button><button data-v="apl" data-s="apr">Aplicações</button></div></div>
  <div class="bar" id="ctl"><div class="seg" id="sub"></div><div class="seg" id="chi">
   <button data-v="arm" class="on">Armchair</button><button data-v="zig">Zigzag</button></div>
   <span id="anim" hidden><button id="play" class="pl">Enrolar</button><input type="range" id="sl" min="0" max="1000" value="0" aria-label="Progresso da animação"><button id="vec" class="tg on">Vetores</button></span></div>
@@ -73,10 +99,74 @@ canvas#cv:active{cursor:grabbing}
 <h2>O que encontramos</h2>
 <p>A estrutura dos tubos muda pouco no bundle: as ligações variam menos de 4%, e a distância entre paredes de tubos vizinhos fica entre 3,14 e 3,51 Å, compatível com van der Waals. Já o caráter eletrônico depende da composição e da quiralidade: com a mesma quiralidade, trocar qual tubo fica dentro e qual fica fora muda o sistema de metálico para semicondutor, ou o contrário. O maior gap encontrado foi de 0,35 eV, no BNNT@CNT (6,0)@(16,0).</p>
 <h2>Sobre este site</h2>
-<p>As abas mostram os nanotubos isolados (pristine), os híbridos, os bundles, a folha de grafeno enrolando em nanotubo e a replicação da célula do bundle. Os modelos usam geometria ideal construída com os diâmetros obtidos nos cálculos; não são as coordenadas relaxadas do SIESTA.</p>
-<p><button class="pl" id="go">Ver os modelos</button></p>
+<p>Em Ver os modelos ficam a folha de grafeno enrolando em nanotubo, os nanotubos isolados (pristine), os híbridos, os bundles e a replicação da célula do bundle. Os modelos usam geometria ideal construída com os diâmetros obtidos nos cálculos; não são as coordenadas relaxadas do SIESTA. Em Material do evento ficam o banner apresentado no XV Workshop do PPGFís (UFPI 2026), as referências e o mapa de aplicações dos nanotubos.</p>
+<p class="gos"><button class="pl" id="go">Ver os modelos</button><button class="pl" id="go2">Material do evento</button></p>
 </div></div>
- <div id="ft"><button id="thm" class="tg sm">Modo escuro</button><span class="lg"><i class="dot" style="background:var(--C)"></i>C</span><span class="lg"><i class="dot" style="background:var(--B)"></i>B</span><span class="lg"><i class="dot" style="background:var(--N)"></i>N</span><span id="note" class="lg">Arraste para girar · pinça ou roda para zoom</span><span id="cred">Pesquisa e site desenvolvidos por João Pedro Araújo de Sousa · GitHub: <a href="https://github.com/araujojpedro010-blip">araujojpedro010-blip</a></span></div>
+<div id="apps" hidden><div class="ab">
+<p class="kick">Mapa das aplicações</p>
+<h1>Nanotubos: onde são usados</h1>
+<p class="who">A etiqueta mostra em que estágio cada aplicação está.</p>
+<h2>Nanotubo de carbono (CNT)</h2>
+<p class="prop">rígido · ótimo condutor de calor · metálico ou semicondutor · oxida ao ar a partir de ~450 °C</p>
+<table class="apl"><thead><tr><th>Aplicação</th><th>Estágio</th></tr></thead><tbody>
+<tr><td><span class="an">Baterias de íon-lítio</span><span class="ad">aditivo condutor no eletrodo, no lugar do negro de fumo</span></td><td><span class="st com">Comercial</span></td></tr>
+<tr><td><span class="an">Concreto (EdenCrete)</span><span class="ad">aditivo para estradas · mais resistência e durabilidade, não menos peso</span></td><td><span class="st com">Comercial</span></td></tr>
+<tr><td><span class="an">Vantablack</span><span class="ad">nanotubos alinhados prendem a luz · absorve até 99,965% · câmeras e sensores</span></td><td><span class="st com">Comercial</span></td></tr>
+<tr><td><span class="an">Casco de navio</span><span class="ad">revestimento antiaderente de silicone + CNT · algas e cracas se soltam</span></td><td><span class="st dev">Desenvolvimento</span></td></tr>
+<tr><td><span class="an">Transistores</span><span class="ad">processador RV16X-NANO (MIT, 2019) · usa CNT semicondutor</span></td><td><span class="st pro">Protótipo</span></td></tr>
+</tbody></table>
+<h2>Nanotubo de nitreto de boro (BNNT)</h2>
+<p class="prop">isolante · gap largo · rigidez parecida com a do CNT · estável ao ar até ~900 °C</p>
+<table class="apl"><thead><tr><th>Aplicação</th><th>Estágio</th></tr></thead><tbody>
+<tr><td><span class="an">Blindagem de nêutrons</span><span class="ad">o boro absorve nêutrons muito melhor que o carbono · missões espaciais</span></td><td><span class="st dev">Desenvolvimento</span></td></tr>
+<tr><td><span class="an">Ambientes extremos</span><span class="ad">compósitos leves, proteção térmica, peças de motor (NASA)</span></td><td><span class="st dev">Desenvolvimento</span></td></tr>
+<tr><td><span class="an">Sensores e atuadores</span><span class="ad">piezoelétrico · funciona em alta temperatura</span></td><td><span class="st pes">Pesquisa</span></td></tr>
+</tbody></table>
+<h2>Híbridos coaxiais (o meu trabalho)</h2>
+<p class="prop">juntam condutor ou semicondutor (C) com isolante e estável (BN)</p>
+<table class="apl"><thead><tr><th>Aplicação</th><th>Estágio</th></tr></thead><tbody>
+<tr><td><span class="an">Nanocabo coaxial</span><span class="ad">CNT conduz por dentro, BNNT isola por fora · fios entre transistores num chip · formato do CNT@BNNT</span></td><td><span class="st pes">Pesquisa</span></td></tr>
+<tr><td><span class="an">Gerenciamento térmico</span><span class="ad">conduz calor sem conduzir eletricidade</span></td><td><span class="st pes">Pesquisa</span></td></tr>
+<tr><td><span class="an">Base teórica</span><span class="ad">nanocabo CNT@BNNT por cálculo ab initio (Zhang, Guo e Tai, 2007)</span></td><td><span class="st pes">Pesquisa</span></td></tr>
+<tr><td><span class="an">Fármacos</span><span class="ad">tubos em geral são estudados · exige raio ≥ ~5 Å → nossos tubos internos são pequenos</span></td><td><span class="st pes">Pesquisa</span></td></tr>
+</tbody></table>
+<p class="leg">Estágio: <span class="st com">Comercial</span> <span class="st pro">Protótipo</span> <span class="st dev">Desenvolvimento</span> <span class="st pes">Pesquisa</span></p>
+</div></div>
+<div id="banp" hidden><div id="banv"><img id="banimg" src="img/banner.jpg" alt="Banner: Electronic Structure of Hybrid BNNT@CNT Nanotube Bundles: A First-Principles Study" draggable="false"></div>
+ <div id="bzm"><button id="bzi" aria-label="Aproximar">+</button><button id="bzo" aria-label="Afastar">−</button><button id="bz1" aria-label="Tamanho original">1×</button></div></div>
+<div id="refs" hidden><div class="ab">
+<p class="kick">Referências</p>
+<h1>Referências do banner</h1>
+<p class="who">Numeradas na ordem em que aparecem no banner.</p>
+<ol class="rl">
+<li>S. Iijima, “Helical microtubules of graphitic carbon”, Nature 354, 56–58 (1991). <a href="https://doi.org/10.1038/354056a0" target="_blank" rel="noopener">doi:10.1038/354056a0</a></li>
+<li>N. G. Chopra et al., “Boron nitride nanotubes”, Science 269, 966–967 (1995). <a href="https://doi.org/10.1126/science.269.5226.966" target="_blank" rel="noopener">doi:10.1126/science.269.5226.966</a></li>
+<li>R. Saito, G. Dresselhaus, M. S. Dresselhaus, Physical Properties of Carbon Nanotubes (Imperial College Press, London, 1998).</li>
+<li>A. Rubio, J. L. Corkill, M. L. Cohen, “Theory of graphitic boron nitride nanotubes”, Phys. Rev. B 49, 5081–5084 (1994). <a href="https://doi.org/10.1103/PhysRevB.49.5081" target="_blank" rel="noopener">doi:10.1103/PhysRevB.49.5081</a></li>
+<li>X. Blase, A. Rubio, S. G. Louie, M. L. Cohen, “Stability and band gap constancy of boron nitride nanotubes”, Europhys. Lett. 28, 335–340 (1994). <a href="https://doi.org/10.1209/0295-5075/28/5/007" target="_blank" rel="noopener">doi:10.1209/0295-5075/28/5/007</a></li>
+<li>K. Suenaga et al., “Synthesis of nanoparticles and nanotubes with well-separated layers of boron nitride and carbon”, Science 278, 653–655 (1997). <a href="https://doi.org/10.1126/science.278.5338.653" target="_blank" rel="noopener">doi:10.1126/science.278.5338.653</a></li>
+<li>H. Pan, Y. P. Feng, J. Lin, “Boron nitride and carbon double-wall hetero-nanotubes: first-principles calculation of electronic properties”, Nanotechnology 19, 095707 (2008). <a href="https://doi.org/10.1088/0957-4484/19/9/095707" target="_blank" rel="noopener">doi:10.1088/0957-4484/19/9/095707</a></li>
+<li>A. Thess et al., “Crystalline ropes of metallic carbon nanotubes”, Science 273, 483–487 (1996). <a href="https://doi.org/10.1126/science.273.5274.483" target="_blank" rel="noopener">doi:10.1126/science.273.5274.483</a></li>
+<li>J. Tersoff, R. S. Ruoff, “Structural properties of a carbon-nanotube crystal”, Phys. Rev. Lett. 73, 676–679 (1994). <a href="https://doi.org/10.1103/PhysRevLett.73.676" target="_blank" rel="noopener">doi:10.1103/PhysRevLett.73.676</a></li>
+<li>H. Dumlich, S. Reich, “Nanotube bundles and tube-tube orientation: a van der Waals density functional study”, preprint arXiv:1207.4654 (2012). <a href="https://arxiv.org/abs/1207.4654" target="_blank" rel="noopener">arXiv:1207.4654</a></li>
+<li>P. Hohenberg, W. Kohn, “Inhomogeneous electron gas”, Phys. Rev. 136, B864–B871 (1964). <a href="https://doi.org/10.1103/PhysRev.136.B864" target="_blank" rel="noopener">doi:10.1103/PhysRev.136.B864</a></li>
+<li>J. M. Soler et al., “The SIESTA method for ab initio order-N materials simulation”, J. Phys.: Condens. Matter 14, 2745–2779 (2002). <a href="https://doi.org/10.1088/0953-8984/14/11/302" target="_blank" rel="noopener">doi:10.1088/0953-8984/14/11/302</a></li>
+<li>K. Lee, É. D. Murray, L. Kong, B. I. Lundqvist, D. C. Langreth, “Higher-accuracy van der Waals density functional”, Phys. Rev. B 82, 081101(R) (2010). <a href="https://doi.org/10.1103/PhysRevB.82.081101" target="_blank" rel="noopener">doi:10.1103/PhysRevB.82.081101</a></li>
+<li>H. J. Monkhorst, J. D. Pack, “Special points for Brillouin-zone integrations”, Phys. Rev. B 13, 5188–5192 (1976). <a href="https://doi.org/10.1103/PhysRevB.13.5188" target="_blank" rel="noopener">doi:10.1103/PhysRevB.13.5188</a></li>
+</ol>
+<h2>Fontes do mapa de aplicações</h2>
+<ul class="rl">
+<li>Kim et al., Phys. Rev. Lett. 87, 215502 (2001). Condutividade térmica do CNT acima de 3000 W/K m.</li>
+<li>Kostoglou et al., Nanomaterials 10, 2435 (2020). Oxidação ao ar: CNT perto de 450 °C, BNNT perto de 900 °C.</li>
+<li>Nature 572, 595 (2019). Processador RV16X-NANO (MIT e Analog Devices).</li>
+<li>Hilder e Hill, Nanotechnology 18, 275704 (2007). Raio mínimo para encapsular cisplatina (modelo contínuo).</li>
+<li>Kakarla e Kong, Nanomaterials 12, 2069 (2022). Biocompatibilidade do BNNT ainda não comprovada.</li>
+<li>Zhang, Guo e Tai, Appl. Phys. Lett. (2007). Nanocabo coaxial CNT@BNNT por cálculo ab initio.</li>
+<li>Revisão sobre nanotubos híbridos BN/C, Nanoscale Adv. 2, 4996 (2020). <a href="https://doi.org/10.1039/D0NA00583E" target="_blank" rel="noopener">doi:10.1039/D0NA00583E</a></li>
+</ul>
+<p class="prop">EdenCrete, Vantablack, revestimento de casco e blindagem de nêutrons (seções de choque da NASA) foram consultados nos sites dos fabricantes e da NASA, sem referência bibliográfica completa registrada.</p>
+</div></div>
+ <div id="ft"><button id="thm" class="tg sm">Modo escuro</button><span class="lg"><i class="dot" style="background:var(--C)"></i>C</span><span class="lg"><i class="dot" style="background:var(--B)"></i>B</span><span class="lg"><i class="dot" style="background:var(--N)"></i>N</span><span id="note" class="lg">Arraste para girar · pinça ou roda para zoom</span><span id="cred">Pesquisa e site desenvolvidos por João Pedro Araújo de Sousa · GitHub: <a href="https://github.com/araujojpedro010-blip" target="_blank" rel="noopener">araujojpedro010-blip</a></span></div>
 <div id="ctt"><div id="cttc"><p class="ct1">Ficou com alguma dúvida ou tem uma sugestão sobre o trabalho? Fale comigo.</p>
  <a id="ctm" href="mailto:araujojpedro013@ufpi.edu.br?subject=Bundles%20BNNT%40CNT%20e%20CNT%40BNNT">araujojpedro013@ufpi.edu.br</a>
  <div class="ctb"><a class="pl ctp" href="mailto:araujojpedro013@ufpi.edu.br?subject=Bundles%20BNNT%40CNT%20e%20CNT%40BNNT">Enviar e-mail</a><button id="ctx" class="tg sm">Fechar</button></div></div>
@@ -92,7 +182,7 @@ const DATA={
  bun:{bc:{arm:{De:13.59,Di:6.03,w:3.26},zig:{De:12.54,Di:5.21,w:3.34}},cb:{arm:{De:14.27,Di:5.56,w:3.14},zig:{De:13.28,Di:4.86,w:3.39}}}};
 const IDX={arm:{i:[4,4],o:[10,10]},zig:{i:[6,0],o:[16,0]}},SH={arm:[4,4],zig:[6,0]};
 const SUBS={pri:[['cnt','CNT'],['bnnt','BNNT']],hib:[['cb','CNT@BNNT'],['bc','BNNT@CNT']],bun:[['cb','CNT@BNNT'],['bc','BNNT@CNT']],rep:[['cb','CNT@BNNT'],['bc','BNNT@CNT']]};
-const HASH={sob:'sobre',pri:'pristine',hib:'hibridos',bun:'bundles',fol:'folha',rep:'replicacao'};
+const HASH={sob:'sobre',apl:'aplicacoes',ban:'banner',ref:'referencias',pri:'pristine',hib:'hibridos',bun:'bundles',fol:'folha',rep:'replicacao'};
 const st={mode:'pri',sub:'cnt',chi:'arm',yaw:0.75,pit:0.55,zoom:1,vec:1};
 const f=v=>v.toFixed(2).replace('.',','),nm=v=>`(${v[0]},${v[1]})`;
 const idealD=(n,m,a)=>a*SQ3*Math.sqrt(n*n+n*m+m*m)/PI;
@@ -274,27 +364,43 @@ function seg(id,cb){$(id).addEventListener('click',e=>{const b=e.target.closest(
 function fillSub(){const L=SUBS[st.mode];if(!L)return;$('sub').innerHTML=L.map((s,i)=>`<button data-v="${s[0]}"${i?'':' class="on"'}>${s[1]}</button>`).join('');st.sub=L[0][0];}
 function tick(ts){if(!playing)return;const dt=last?Math.min(50,ts-last):16;last=ts;let t=prog+dir*dt/(st.mode==='rep'?TL*1000:2600);
  if(t>=1||t<=0){t=Math.max(0,Math.min(1,t));playing=0;}setProg(t);if(playing)requestAnimationFrame(tick);}
-function setMode(v){if(!HASH[v])v='sob';const ab=v==='sob';
- ['ctl','stage','vbar'].forEach(id=>$(id).hidden=ab);$('about').hidden=!ab;document.querySelectorAll('#ft .lg').forEach(e=>e.hidden=ab);
- if(ab){st.mode=v;playing=0;document.querySelectorAll('#mode button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));try{history.replaceState(null,'','#sobre');}catch(e){}if(window.ctPos)ctPos();return;}const anim=v==='fol'||v==='rep';st.mode=v;playing=0;prog=0;
+const SEC={sob:'sob',fol:'nano',pri:'nano',hib:'nano',bun:'nano',rep:'nano',ban:'apr',ref:'apr',apl:'apr'},LASTP={sob:'sob',nano:'fol',apr:'ban'};
+function navSec(v){const s=SEC[v];LASTP[s]=v;document.querySelectorAll('#sec button').forEach(b=>b.classList.toggle('on',b.dataset.v===s));
+ $('navsub').hidden=s==='sob';$('secbar').hidden=s==='sob';document.querySelectorAll('#mode button').forEach(b=>b.hidden=b.dataset.s!==s);}
+function setMode(v){if(!HASH[v])v='sob';navSec(v);const PG={sob:'about',apl:'apps',ban:'banp',ref:'refs'},ab=!!PG[v];
+ ['ctl','stage','vbar'].forEach(id=>$(id).hidden=ab);Object.keys(PG).forEach(k=>$(PG[k]).hidden=v!==k);if(v==='ban')bzSet(bz);if(window.ctPos)ctPos();document.querySelectorAll('#ft .lg').forEach(e=>e.hidden=ab);
+ if(ab){st.mode=v;playing=0;document.querySelectorAll('#mode button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));try{history.replaceState(null,'','#'+HASH[v]);}catch(e){}return;}const anim=v==='fol'||v==='rep';st.mode=v;playing=0;prog=0;
  document.querySelectorAll('#mode button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
  $('sub').hidden=v==='fol';$('anim').hidden=!anim;$('cap').hidden=v!=='rep';fillSub();st.zoom=1;setView(v==='fol'?'fol':v==='rep'?'axial':'iso');
  if(v==='fol')markView(null);resize();build();if(window.ctPos)ctPos();try{history.replaceState(null,'','#'+HASH[v]);}catch(e){}}
-seg('mode',setMode);seg('sub',v=>{st.sub=v;build();});seg('chi',v=>{st.chi=v;build();});seg('view',setView);
+seg('mode',setMode);$('sec').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setMode(LASTP[b.dataset.v]);});seg('sub',v=>{st.sub=v;build();});seg('chi',v=>{st.chi=v;build();});seg('view',setView);
 $('play').onclick=()=>{if(st.mode==='rep'){if(playing){playing=0;setProg(prog);return;}if(prog>=1)prog=0;dir=1;}else dir=prog>0.5?-1:1;
  playing=1;last=0;if(st.mode==='rep')setProg(prog);requestAnimationFrame(tick);};
 $('sl').oninput=e=>{playing=0;setProg(e.target.value/1000);};
 $('vec').onclick=()=>{st.vec^=1;$('vec').classList.toggle('on',!!st.vec);req();};
 
+// ---------- banner (zoom com botões e pinça) ----------
+let bz=1;const banv=$('banv'),bimg=$('banimg');
+function bzSet(z,cxr,cyr){z=Math.max(1,Math.min(6,z));const r=banv.getBoundingClientRect();
+ const fx=(banv.scrollLeft+(cxr??r.width/2))/Math.max(1,banv.scrollWidth),fy=(banv.scrollTop+(cyr??r.height/2))/Math.max(1,banv.scrollHeight);
+ bz=z;bimg.style.width=(100*z)+'%';
+ banv.scrollLeft=fx*banv.scrollWidth-(cxr??r.width/2);banv.scrollTop=fy*banv.scrollHeight-(cyr??r.height/2);}
+$('bzi').onclick=()=>bzSet(bz*1.4);$('bzo').onclick=()=>bzSet(bz/1.4);$('bz1').onclick=()=>bzSet(1);
+let bd0=0,bz0=1;const tdist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+banv.addEventListener('touchstart',e=>{if(e.touches.length===2){bd0=tdist(e.touches);bz0=bz;}},{passive:true});
+banv.addEventListener('touchmove',e=>{if(e.touches.length===2&&bd0){e.preventDefault();const r=banv.getBoundingClientRect();
+ bzSet(bz0*tdist(e.touches)/bd0,(e.touches[0].clientX+e.touches[1].clientX)/2-r.left,(e.touches[0].clientY+e.touches[1].clientY)/2-r.top);}},{passive:false});
+banv.addEventListener('touchend',e=>{if(e.touches.length<2)bd0=0;});
+banv.addEventListener('wheel',e=>{if(!e.ctrlKey)return;e.preventDefault();const r=banv.getBoundingClientRect();bzSet(bz*Math.exp(-e.deltaY*0.002),e.clientX-r.left,e.clientY-r.top);},{passive:false});
 // ---------- caixa de contato ----------
 const ctt=$('ctt'),cttc=$('cttc'),cto=$('cto');
-window.ctPos=function(){const el=['stage','about'].map($).find(e=>!e.hidden);if(!el)return;ctt.style.bottom=Math.max(12,innerHeight-el.getBoundingClientRect().bottom+12)+'px';}
+window.ctPos=function(){const el=['stage','about','apps','banp','refs'].map($).find(e=>!e.hidden);if(!el)return;ctt.style.bottom=Math.max(12,innerHeight-el.getBoundingClientRect().bottom+12)+'px';}
 function ctShow(open){cttc.hidden=!open;cto.hidden=open;try{localStorage.setItem('nt-ct',open?'1':'0');}catch(e){}}
 $('ctx').onclick=()=>ctShow(false);cto.onclick=()=>ctShow(true);
 let ct0=true;try{ct0=localStorage.getItem('nt-ct')!=='0';}catch(e){}ctShow(ct0);
 window.addEventListener('resize',ctPos);
 const fromHash=()=>{const h=location.hash.slice(1);return Object.keys(HASH).find(k=>HASH[k]===h)||'sob';};
-$('go').onclick=()=>setMode('pri');
+$('go').onclick=()=>setMode('fol');$('go2').onclick=()=>setMode('ban');
 window.addEventListener('hashchange',()=>{const m=fromHash();if(m!==st.mode)setMode(m);});
 window.addEventListener('resize',resize);
 const remk=()=>{mkSpr();drawBg();req();};
