@@ -7,7 +7,7 @@
 :root[data-theme=dark]{--bg:#070c14;--fg:#e3ebf5;--pn:rgba(10,18,30,.80);--pn2:rgba(12,22,36,.93);--bd:#24384f;--mut:#8ea1b9;--ac:#2f8cff;--ac2:#2fd0ff;--glow:rgba(47,170,255,.45);--glow0:rgba(47,170,255,0);--spot:rgba(7,12,20,.72);--spot0:rgba(7,12,20,0);--gl:#1b3049;--gi:#112237;--lit:rgba(47,160,255,.10);--C:#d5dde8;--B:#ffb224;--N:#6aa8ff;--bond:#8a99ae;--v1:#ff6b6b;--v2:#51cf66;--vT:#b197fc;--cell:#ced4da}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--fg);font:14px system-ui,-apple-system,"Segoe UI",sans-serif}
-#bgc{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#bgc{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:0;pointer-events:none}
 #app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
 .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:8px;background:var(--pn);border-bottom:1px solid var(--bd);box-shadow:0 1px 14px -8px var(--glow);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .bar.bt{border-top:1px solid var(--bd);border-bottom:0}
@@ -61,7 +61,7 @@ table.apl td{border-bottom:1px solid var(--bd);padding:9px 4px;vertical-align:to
 .leg{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;color:var(--mut);font-size:13px}
 #refs{flex:1;min-height:0;overflow:auto;padding:clamp(18px,4vw,40px) 16px}
 #banp{flex:1;min-height:0;position:relative}
-#banv{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:10px}
+#banv{position:absolute;top:0;left:0;right:0;bottom:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:10px}
 #banv img{display:block;width:100%;height:auto;margin:0 auto;border-radius:6px;box-shadow:0 0 22px -6px var(--glow);background:#fff;user-select:none;-webkit-user-select:none}
 #bzm{position:absolute;right:16px;top:16px;display:flex;flex-direction:column;gap:6px}
 #bzm button{width:40px;height:40px;border-radius:10px;border:1px solid var(--bd);background:var(--pn2);color:var(--fg);font-size:18px;cursor:pointer;box-shadow:0 0 10px -4px var(--glow)}
@@ -87,7 +87,7 @@ a.pl.lk{display:inline-block;text-decoration:none;text-align:center}
   <div id="zm"><button id="zi" aria-label="Aproximar">+</button><button id="zo" aria-label="Afastar">−</button><button id="z1" aria-label="Tamanho original">1×</button></div></div>
  <div class="bar bt" id="vbar"><div class="seg" id="view">
   <button data-v="axial">Axial</button><button data-v="lat">Lateral</button><button data-v="iso" class="on">Isométrica</button></div></div>
- <div id="about" hidden><div class="ab">
+ <div id="about"><div class="ab">
 <p class="kick">Grupo de Nanofísica Computacional · Universidade Federal do Piauí</p>
 <h1>Propriedades estruturais e eletrônicas de bundles de nanotubos híbridos BNNT@CNT e CNT@BNNT</h1>
 <p class="who">João Pedro Araújo de Sousa · Orientador: Prof. Dr. Ramon Sampaio Ferreira</p>
@@ -280,7 +280,8 @@ const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).tri
 const bgc=$('bgc'),bx=bgc.getContext('2d');
 const rng=s=>()=>{s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};
 function hexP(g,x,y,r){g.beginPath();for(let k=0;k<6;k++){const a=PI/6+k*PI/3;k?g.lineTo(x+r*Math.cos(a),y+r*Math.sin(a)):g.moveTo(x+r*Math.cos(a),y+r*Math.sin(a));}g.closePath();}
-function drawBg(){const w=innerWidth,h=innerHeight,d=Math.min(2,devicePixelRatio||1),g=bx;bgc.width=w*d;bgc.height=h*d;g.setTransform(d,0,0,d,0,0);
+function drawBg(){try{drawBg0();}catch(e){try{bgc.width=1;bgc.height=1;}catch(_){}}}
+function drawBg0(){const w=innerWidth,h=innerHeight,d=Math.min(2,devicePixelRatio||1),g=bx;bgc.width=w*d;bgc.height=h*d;g.setTransform(d,0,0,d,0,0);
  g.fillStyle=cssv('--bg');g.fillRect(0,0,w,h);
  const r=Math.max(26,Math.min(42,Math.min(w,h)/18)),hw=SQ3*r,rnd=rng(7),ac=cssv('--ac'),gl=cssv('--gl'),gi=cssv('--gi'),lit=cssv('--lit');
  for(let j=-1;j*1.5*r<h+r;j++){const y=j*1.5*r;for(let i=-1;i*hw<w+hw;i++){const x=i*hw+(j&1?hw/2:0),on=rnd()<0.06;
@@ -381,10 +382,10 @@ $('vec').onclick=()=>{st.vec^=1;$('vec').classList.toggle('on',!!st.vec);req();}
 
 // ---------- banner (zoom com botões e pinça) ----------
 let bz=1;const banv=$('banv'),bimg=$('banimg');
-function bzSet(z,cxr,cyr){z=Math.max(1,Math.min(6,z));const r=banv.getBoundingClientRect();
- const fx=(banv.scrollLeft+(cxr??r.width/2))/Math.max(1,banv.scrollWidth),fy=(banv.scrollTop+(cyr??r.height/2))/Math.max(1,banv.scrollHeight);
+function bzSet(z,cxr,cyr){z=Math.max(1,Math.min(6,z));const r=banv.getBoundingClientRect();if(cxr==null)cxr=r.width/2;if(cyr==null)cyr=r.height/2;
+ const fx=(banv.scrollLeft+cxr)/Math.max(1,banv.scrollWidth),fy=(banv.scrollTop+cyr)/Math.max(1,banv.scrollHeight);
  bz=z;bimg.style.width=(100*z)+'%';
- banv.scrollLeft=fx*banv.scrollWidth-(cxr??r.width/2);banv.scrollTop=fy*banv.scrollHeight-(cyr??r.height/2);}
+ banv.scrollLeft=fx*banv.scrollWidth-cxr;banv.scrollTop=fy*banv.scrollHeight-cyr;}
 $('bzi').onclick=()=>bzSet(bz*1.4);$('bzo').onclick=()=>bzSet(bz/1.4);$('bz1').onclick=()=>bzSet(1);
 let bd0=0,bz0=1;const tdist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
 banv.addEventListener('touchstart',e=>{if(e.touches.length===2){bd0=tdist(e.touches);bz0=bz;}},{passive:true});
@@ -408,7 +409,9 @@ const thm=$('thm');function setTheme(t){document.documentElement.dataset.theme=t
 let t0='light';try{t0=localStorage.getItem('nt-theme')==='dark'?'dark':'light';}catch(e){}setTheme(t0);
 thm.onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
 new MutationObserver(remk).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-mkSpr();resize();setMode(fromHash());ctPos();
+try{mkSpr();}catch(e){}setMode(fromHash());try{ctPos();}catch(e){}
+let rbT=0;const rb=()=>{clearTimeout(rbT);rbT=setTimeout(()=>{resize();try{ctPos();}catch(e){}},120);};
+window.addEventListener('load',rb);window.addEventListener('orientationchange',rb);if(window.visualViewport)visualViewport.addEventListener('resize',rb);setTimeout(rb,400);
 }
 </script>
 </body></html>
