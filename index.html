@@ -44,6 +44,11 @@ canvas#cv:active{cursor:grabbing}
 .ab p{margin:0 0 10px}.kick,.who{color:var(--mut);font-size:14px}
 #cred{color:var(--mut)}#cred a{color:var(--ac)}
 #cap{position:absolute;left:12px;right:64px;bottom:12px;padding:9px 12px;border-radius:10px;background:var(--pn2);border:1px solid var(--bd);font-size:14px;line-height:1.4;max-width:720px;box-shadow:0 0 16px -8px var(--glow)}
+#ctt{position:fixed;right:12px;z-index:5;display:flex;flex-direction:column;align-items:flex-end;bottom:80px}
+#cttc{width:min(270px,calc(100vw - 24px));background:var(--pn2);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;box-shadow:0 0 24px -6px var(--glow);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:13.5px;line-height:1.45}
+.ct1{margin:0 0 6px}#ctm{color:var(--ac);word-break:break-all;font-size:13.5px}
+.ctb{display:flex;gap:8px;align-items:center;margin-top:10px}
+.ctp{min-width:0;padding:7px 14px;font-size:13.5px;text-decoration:none;display:inline-block}
 </style></head><body>
 <canvas id="bgc" aria-hidden="true"></canvas>
 <div id="app">
@@ -72,6 +77,10 @@ canvas#cv:active{cursor:grabbing}
 <p><button class="pl" id="go">Ver os modelos</button></p>
 </div></div>
  <div id="ft"><button id="thm" class="tg sm">Modo escuro</button><span class="lg"><i class="dot" style="background:var(--C)"></i>C</span><span class="lg"><i class="dot" style="background:var(--B)"></i>B</span><span class="lg"><i class="dot" style="background:var(--N)"></i>N</span><span id="note" class="lg">Arraste para girar · pinça ou roda para zoom</span><span id="cred">Pesquisa e site desenvolvidos por João Pedro Araújo de Sousa · GitHub: <a href="https://github.com/araujojpedro010-blip">araujojpedro010-blip</a></span></div>
+<div id="ctt"><div id="cttc"><p class="ct1">Ficou com alguma dúvida ou tem uma sugestão sobre o trabalho? Fale comigo.</p>
+ <a id="ctm" href="mailto:araujojpedro013@ufpi.edu.br?subject=Bundles%20BNNT%40CNT%20e%20CNT%40BNNT">araujojpedro013@ufpi.edu.br</a>
+ <div class="ctb"><a class="pl ctp" href="mailto:araujojpedro013@ufpi.edu.br?subject=Bundles%20BNNT%40CNT%20e%20CNT%40BNNT">Enviar e-mail</a><button id="ctx" class="tg sm">Fechar</button></div></div>
+ <button id="cto" class="pl ctp" hidden>Contato</button></div>
 </div>
 <script>
 {
@@ -267,15 +276,23 @@ function tick(ts){if(!playing)return;const dt=last?Math.min(50,ts-last):16;last=
  if(t>=1||t<=0){t=Math.max(0,Math.min(1,t));playing=0;}setProg(t);if(playing)requestAnimationFrame(tick);}
 function setMode(v){if(!HASH[v])v='sob';const ab=v==='sob';
  ['ctl','stage','vbar'].forEach(id=>$(id).hidden=ab);$('about').hidden=!ab;document.querySelectorAll('#ft .lg').forEach(e=>e.hidden=ab);
- if(ab){st.mode=v;playing=0;document.querySelectorAll('#mode button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));try{history.replaceState(null,'','#sobre');}catch(e){}return;}const anim=v==='fol'||v==='rep';st.mode=v;playing=0;prog=0;
+ if(ab){st.mode=v;playing=0;document.querySelectorAll('#mode button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));try{history.replaceState(null,'','#sobre');}catch(e){}if(window.ctPos)ctPos();return;}const anim=v==='fol'||v==='rep';st.mode=v;playing=0;prog=0;
  document.querySelectorAll('#mode button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
  $('sub').hidden=v==='fol';$('anim').hidden=!anim;$('cap').hidden=v!=='rep';fillSub();st.zoom=1;setView(v==='fol'?'fol':v==='rep'?'axial':'iso');
- if(v==='fol')markView(null);resize();build();try{history.replaceState(null,'','#'+HASH[v]);}catch(e){}}
+ if(v==='fol')markView(null);resize();build();if(window.ctPos)ctPos();try{history.replaceState(null,'','#'+HASH[v]);}catch(e){}}
 seg('mode',setMode);seg('sub',v=>{st.sub=v;build();});seg('chi',v=>{st.chi=v;build();});seg('view',setView);
 $('play').onclick=()=>{if(st.mode==='rep'){if(playing){playing=0;setProg(prog);return;}if(prog>=1)prog=0;dir=1;}else dir=prog>0.5?-1:1;
  playing=1;last=0;if(st.mode==='rep')setProg(prog);requestAnimationFrame(tick);};
 $('sl').oninput=e=>{playing=0;setProg(e.target.value/1000);};
 $('vec').onclick=()=>{st.vec^=1;$('vec').classList.toggle('on',!!st.vec);req();};
+
+// ---------- caixa de contato ----------
+const ctt=$('ctt'),cttc=$('cttc'),cto=$('cto');
+window.ctPos=function(){const el=['stage','about'].map($).find(e=>!e.hidden);if(!el)return;ctt.style.bottom=Math.max(12,innerHeight-el.getBoundingClientRect().bottom+12)+'px';}
+function ctShow(open){cttc.hidden=!open;cto.hidden=open;try{localStorage.setItem('nt-ct',open?'1':'0');}catch(e){}}
+$('ctx').onclick=()=>ctShow(false);cto.onclick=()=>ctShow(true);
+let ct0=true;try{ct0=localStorage.getItem('nt-ct')!=='0';}catch(e){}ctShow(ct0);
+window.addEventListener('resize',ctPos);
 const fromHash=()=>{const h=location.hash.slice(1);return Object.keys(HASH).find(k=>HASH[k]===h)||'sob';};
 $('go').onclick=()=>setMode('pri');
 window.addEventListener('hashchange',()=>{const m=fromHash();if(m!==st.mode)setMode(m);});
@@ -285,7 +302,7 @@ const thm=$('thm');function setTheme(t){document.documentElement.dataset.theme=t
 let t0='light';try{t0=localStorage.getItem('nt-theme')==='dark'?'dark':'light';}catch(e){}setTheme(t0);
 thm.onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
 new MutationObserver(remk).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-mkSpr();resize();setMode(fromHash());
+mkSpr();resize();setMode(fromHash());ctPos();
 }
 </script>
 </body></html>
